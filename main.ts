@@ -1,42 +1,36 @@
-input.onPinPressed(TouchPin.P2, function () {
-    basic.showLeds(`
-        . # . # .
-        # . # . #
-        . # # # .
-        # . # . #
-        . # . # .
-        `)
-    ContinuousServo.spin_one_way_with_speed(AnalogPin.P0, 100)
-    basic.pause(500)
-    ContinuousServo.turn_off_motor(DigitalPin.P0)
-    basic.pause(59000)
-    ContinuousServo.spin_one_way_with_speed(AnalogPin.P0, 100)
-    basic.pause(500)
-    ContinuousServo.turn_off_motor(DigitalPin.P0)
+basic.forever(function () {
+    if (input.lightLevel() > 150) {
+        ContinuousServo.spin_one_way_with_speed(AnalogPin.P2, 100)
+        basic.pause(500)
+        ContinuousServo.turn_off_motor(DigitalPin.P2)
+        basic.pause(1800000)
+        ContinuousServo.spin_other_way_with_speed(AnalogPin.P2, 100)
+        basic.pause(500)
+        ContinuousServo.turn_off_motor(DigitalPin.P2)
+    }
 })
-loops.everyInterval(60000, function () {
-    if (input.temperature() < 20) {
-        basic.showLeds(`
-            # . # . #
-            . # # # .
-            # # # # #
-            . # # # .
-            # . # . #
-            `)
+basic.forever(function () {
+    if (input.temperature() > 20) {
         ContinuousServo.spin_one_way_with_speed(AnalogPin.P0, 100)
         basic.pause(500)
         ContinuousServo.turn_off_motor(DigitalPin.P0)
-        servos.P1.setAngle(90)
-        basic.pause(59000)
-        ContinuousServo.spin_one_way_with_speed(AnalogPin.P0, 100)
+        ContinuousServo.spin_one_way_with_speed(AnalogPin.P1, 100)
+        basic.pause(1800000)
+        ContinuousServo.turn_off_motor(DigitalPin.P1)
+        ContinuousServo.spin_other_way_with_speed(AnalogPin.P0, 100)
         basic.pause(500)
         ContinuousServo.turn_off_motor(DigitalPin.P0)
     }
-    basic.showLeds(`
-        . # . # .
-        # # . # #
-        . . # . .
-        # # . # #
-        . # . # .
-        `)
+})
+basic.forever(function () {
+    let vochtigheid = 0
+    if (vochtigheid > 50) {
+        ContinuousServo.spin_one_way_with_speed(AnalogPin.P0, 100)
+        basic.pause(500)
+        ContinuousServo.turn_off_motor(DigitalPin.P0)
+        basic.pause(1800000)
+        ContinuousServo.spin_other_way_with_speed(AnalogPin.P0, 100)
+        basic.pause(500)
+        ContinuousServo.turn_off_motor(DigitalPin.P0)
+    }
 })
